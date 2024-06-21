@@ -1,10 +1,12 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState } from 'react';
-import { fetchCategories } from '../../services/operations/productapi';
+import { fetchCategories } from '../services/operations/productapi';
 import { useEffect } from 'react';
-import { getCategoryPageData } from '../../services/operations/productapi';
-import { ErrorPage } from '../ErrorPage';
+import { getCategoryPageData } from '../services/operations/productapi';
+import { ErrorPage } from './ErrorPage';
+import { Link } from 'react-router-dom';
+import { ProductCard } from '../components/ProductCard';
 
 export const CategoryPage = () => {
     const {categoryName}= useParams();
@@ -38,7 +40,7 @@ export const CategoryPage = () => {
         // setCategoryId(category_id);
     }
     useEffect(()=>{
-        getCategories();
+        getCategories();  
     },[categoryName]);
 
     // get category page data
@@ -53,7 +55,7 @@ export const CategoryPage = () => {
                 console.log(error)
             }
         }
-        if(categoryId) {
+        if(categoryId) { // ie agr categoryId null nhi hai tbhi call kro 
             getCategoryDetails();
         }
         
@@ -68,20 +70,17 @@ export const CategoryPage = () => {
             ( 
             <div>
                 <div>
-                    <p>Home/{categoryPageData?.selectedCategory?.name}</p>
+                    <p>Home / {categoryPageData?.selectedCategory?.name}</p>
                     <p>{categoryPageData?.selectedCategory?.name}: {categoryPageData?.selectedCategory?.products?.length}</p>
                 </div>
+                {/* prouduct cards */}
                 <div>
                     {
                     categoryPageData?.selectedCategory?.products?.length !==0 && (
                         <div  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                             {
                             categoryPageData?.selectedCategory?.products.map( (product,index)=> (
-                                <div key={index}  className="border rounded-lg p-4 shadow-md">
-                                    <img src={product?.thumbnail} alt='' className="w-full h-48 object-cover mb-4"></img>
-                                    <p  className="text-lg font-semibold">{product?.name}</p>
-                                    <p className="text-gray-600">Rs.{product?.price}</p>
-                                </div>
+                               <ProductCard product={product} key={index}/>
                             ))
                             }
                         </div>

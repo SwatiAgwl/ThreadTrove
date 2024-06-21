@@ -18,7 +18,8 @@ import { useSelector } from 'react-redux';
 import { OrdersPage } from './pages/customerPages/OrdersPage';
 import { WishlistPage } from './pages/customerPages/WishlistPage';
 import { CreateProduct } from './pages/adminPages/CreateProduct';
-import { CategoryPage } from './pages/authPages/CategoryPage';
+import { CategoryPage } from './pages/CategoryPage';
+import { ProductPage } from './pages/ProductPage';
 
 function App() {
     const {user}= useSelector((state)=> state.user);
@@ -38,6 +39,7 @@ function App() {
 
 
         <Route path='/category/:categoryName' element={<CategoryPage/>} ></Route>
+        <Route path='/product/:product_id' element={<ProductPage/>} ></Route>
 
 
 

@@ -246,7 +246,7 @@ export const Navbar = () => {
             <li
               onMouseOver={() => setItem('Women')}
               onMouseOut={() => setItem('')}
-              className='group relative'
+              className='group relative  hover:underline'
             >
               Women
               {item === 'Women' && (
@@ -275,7 +275,7 @@ export const Navbar = () => {
             <li
               onMouseOver={() => setItem('Men')}
               onMouseOut={() => setItem('')}
-              className='group relative'
+              className='group relative hover:underline'
             >
               Men
               {item === 'Men' && (
@@ -303,7 +303,7 @@ export const Navbar = () => {
             <li
               onMouseOver={() => setItem('Brands')}
               onMouseOut={() => setItem('')}
-              className='group relative'
+              className='group relative hover:underline'
             >
               Brands
               {item === 'Brands' && (
@@ -331,7 +331,7 @@ export const Navbar = () => {
             <li
               onMouseOver={() => setItem('More')}
               onMouseOut={() => setItem('')}
-              className='group relative'
+              className='group relative hover:underline'
             >
               More
               {item === 'More' && (
@@ -357,10 +357,10 @@ export const Navbar = () => {
               )}
             </li>
             <li>
-              <Link to={'/about'}>About Us</Link>
+              <Link className='hover:underline' to={'/about'}>About Us</Link>
             </li>
             <li>
-              <Link to={'/contact'}>Contact Us</Link>
+              <Link className='hover:underline' to={'/contact'}>Contact Us</Link>
             </li>
           </ul>
         </nav>
@@ -382,6 +382,12 @@ export const Navbar = () => {
               <CgProfile />
               <div className='absolute top-full mt-2 -left-10 opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white border border-gray-100 text-gray-500 py-2 px-2 z-50'>
                 <ul>
+                  <li>
+                     <Link to={'/orders'}>
+                        Orders
+                     </Link>
+                     
+                  </li>
                   <li>
                     <Link to={'/edit-profile'} className='whitespace-nowrap'>
                       Edit Profile

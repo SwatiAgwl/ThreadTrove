@@ -96,6 +96,9 @@ exports.getAllUserDetails = async (req, res) => {
         const id = req.user.id
         const userDetails = await User.findById(id)
                             .populate("additionalDetails")
+                            .populate("wishlist")
+                            .populate("cart")
+                            .populate("orders")
                             .exec()
         console.log(userDetails)
         res.status(200).json({

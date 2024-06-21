@@ -22,7 +22,7 @@ export const profileEndpoints= {
 
 export const productEndpoints= {
     createProduct_api: base_url + "/product/createProduct",
+    getProductDetails_api: base_url + "/product/getProductDetails",
     getAllCategories_api: base_url + "/product/getAllCategories",
     getCategoryPageData_api: base_url + "/product/categoryPage",
 }
-        

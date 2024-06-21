@@ -3,7 +3,7 @@ import { productEndpoints } from "../apis";
 import toast from "react-hot-toast";
 
 
-const {createProduct_api ,getAllCategories_api, getCategoryPageData_api} = productEndpoints
+const {createProduct_api , getProductDetails_api,getAllCategories_api, getCategoryPageData_api} = productEndpoints
 // fetch all categories
 export const fetchCategories= async()=>{
     let result=[];
@@ -59,6 +59,25 @@ export const getCategoryPageData= async(categoryId)=>{
     catch(err){
         console.log("get category page data api error ",err);
         toast.error("Couldn't fetch category page data");
+    }
+    return result;
+}
+
+
+// get details of a product
+export const fetchProductDetails = async(product_id)=>{
+    let result="";
+    try{
+        const response= await apiConnector("POST", getProductDetails_api,{prodId:product_id});
+        console.log("get product details api response ",response);
+        if( !response?.data?.success){
+            throw new Error(response.data.message);
+        }
+        result= response?.data?.data;
+    }
+    catch(err){
+        console.log("get product details api error ",err);
+        toast.error("Couldn't fetch the product data");
     }
     return result;
 }
