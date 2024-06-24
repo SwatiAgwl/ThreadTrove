@@ -1,16 +1,22 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFromBag } from '../../slices/bagSlice';
+import { buyProduct } from '../../services/operations/paymentapi';
+import { useNavigate } from 'react-router-dom';
 
 export const BagPage = () => {
     const dispatch= useDispatch(); 
     const {bagItems,bagTotal,totalItems}= useSelector((state)=> state.bag);
+    const {token}= useSelector((state)=>state.auth);
+    const {user}= useSelector((state)=>state.user);
+    const navigate= useNavigate();
 
 
     function handlePlaceOrder(){
         const products= bagItems.map( (product)=> product._id);
         console.log("buying all these products ",products);
         // todo: yha se hm payment gateway par jaege to api integrate krni hai jo vhan le jae
+        buyProduct(token,products,user,navigate,dispatch);
     }
   return (
     <div className='w-8/12 max-w-maxContent mx-auto py-6'>

@@ -7,7 +7,7 @@ const {auth,isCustomer,Admin}= require('../middlewares/auth');
 
 router.post('/updateProfile', auth,updateProfile);
 router.delete('/deleteAccount',auth, deleteAccount);
-router.get('/getAllOrders',auth, getAllOrders);
+router.get('/getAllOrders',auth, getAllOrders); // isCustomer
 router.get('/getAllUserDetails',auth, getAllUserDetails);
 
 module.exports= router;

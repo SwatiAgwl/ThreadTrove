@@ -1,19 +1,28 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react';
 import { fetchProductDetails } from '../services/operations/productapi';
 import { SlHandbag } from 'react-icons/sl';
 import { useDispatch, useSelector } from 'react-redux';
 import {  addToBag } from '../slices/bagSlice';
+import {buyProduct} from "../services/operations/paymentapi"
+import { ErrorPage } from './ErrorPage';
+import { ConfirmationModal } from '../components/ConfirmationModal';
+import { setOrderItems } from '../slices/orderSlice';
+import { getOrders } from '../services/operations/profileapi';
+
+
 
 
 export const ProductPage = () => {
     const {product_id}= useParams();
     const [productDetails,setProductDetails]= useState("");
-    const [bagStatus, setBagStatus]= useState(false);
-    const {bagItems}= useSelector( (state)=> state.bag);
     const dispatch= useDispatch();
-
+    const navigate= useNavigate();
+    const {token}= useSelector((state)=> state.auth)
+    const {user}= useSelector ((state)=> state.user)
+    const [confirmationModal,setConfirmationModal]= useState(null);
+    
     // fetch product details
     const fetchProduct= async()=>{
         const res= await fetchProductDetails(product_id);
@@ -26,8 +35,52 @@ export const ProductPage = () => {
     },[product_id]);
 
     const bagHandler= (data)=>{
-        dispatch(addToBag(data));
-        setBagStatus(true); // refresh se value false ho rhi hai
+        if(token){
+            dispatch(addToBag(data));
+            return;
+        }
+        setConfirmationModal({
+            text1: "You are not logged in",
+            text2: "Please login to add to bag",
+            btn1text: "Login",
+            btn2text: "Cancel",
+            btn1handler: ()=> navigate("/login"),
+            btn2handler: ()=> setConfirmationModal(null)
+        })
+    }
+
+
+    
+    const buyProductHandler= async()=>{
+        if( token){
+            await buyProduct(token,[product_id],user,navigate,dispatch);
+            // getOrderItems(); need orderItems slice as need to reset orderItems after payment
+            // const response= await getOrders(token);
+            // console.log("after payment succ might be error of response ",response);
+            // if( response){
+            //     dispatch(setOrderItems(response));
+            // }
+
+            return;
+        }
+        setConfirmationModal ({
+            text1: "You are not logged in",
+            text2: "Please Login to purchase product",
+            btn1text: "Login",
+            btn2text: "Cancel",
+            btn1handler: ()=> navigate('/login'),
+            btn2handler: ()=> setConfirmationModal(null),
+        })
+    }
+
+    //if( !productDetails.success){
+    if( productDetails === ""){
+        console.log("success ", productDetails.success);
+        return (
+            <div>
+                <ErrorPage/>
+            </div>
+        )
     }
 
   return (
@@ -46,10 +99,17 @@ export const ProductPage = () => {
                     <button onClick={()=>bagHandler(productDetails)} className='flex flex-row gap-2 items-center bg-red-500 text-white px-4 py-2 rounded w-[40%]'> 
                         <SlHandbag />Add To Bag
                     </button>               
-                    <button className='flex flex-row gap-2 items-cente border border-gray-600 px-4 py-2 rounded w-[40%]'>Buy Now</button>
+                    <button onClick={buyProductHandler} className='flex flex-row gap-2 items-cente border border-gray-600 px-4 py-2 rounded w-[40%]'>
+                        Buy Now
+                    </button>
                 </div>
             </div>
         </div>
+        { 
+            confirmationModal && (
+                <ConfirmationModal modalData={confirmationModal}/>
+            )
+        }
     </div>
   )
 }

@@ -3,7 +3,7 @@ const app= express();
 
 const userRoutes= require('./routes/user');
 const profileRoutes= require('./routes/profile');
-// const paymentRoutes= require('./routes/payment');
+const paymentRoutes= require('./routes/payment');
 const productRoutes= require('./routes/product');
 
 const dotenv= require('dotenv');
@@ -36,7 +36,7 @@ cloudinaryConnect();
 app.use("/api/v1/user",userRoutes);
 app.use("/api/v1/profile",profileRoutes);
 app.use("/api/v1/product", productRoutes);
-// app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/payment", paymentRoutes);
 
 // default route
 app.get("/", (req,res)=>{

@@ -8,7 +8,7 @@ const initialState= {
 }
 const bagSlice= createSlice({
     name: "bag",
-    initialState: initialState,
+    initialState: initialState, 
     reducers: {
         // setTotalItems(state,action){
         //     state.totalItems= action.payload;

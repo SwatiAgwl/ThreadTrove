@@ -12,7 +12,7 @@ const orderSchema= new mongoose.Schema({
     },
     status: {
         type: String,
-        required: true,
+        //required: true,
     },
     items: [ { 
         type: mongoose.Schema.Types.ObjectId,

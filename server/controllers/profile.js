@@ -151,7 +151,7 @@ exports.getAllOrders= async(req,res)=>{
         return res.status(200).json({
             success: true,
             message: "Displaying all order items",
-            data: userDetails?.orders?.items,
+            data: userDetails?.orders,
         })
     }
     catch(err){

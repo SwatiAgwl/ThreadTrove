@@ -1,4 +1,5 @@
 
+
 const base_url= process.env.react_app_base_url
 
 export const categories= {
@@ -25,4 +26,11 @@ export const productEndpoints= {
     getProductDetails_api: base_url + "/product/getProductDetails",
     getAllCategories_api: base_url + "/product/getAllCategories",
     getCategoryPageData_api: base_url + "/product/categoryPage",
+}
+
+
+export const paymentEndpoints= {
+    capturePayment_api : base_url + "/payment/capturePayment",
+    verifySignature_api : base_url + "/payment/verifySignature",
+    sendEmailSucc_api : base_url + "/payment/sendPaymentSuccessEmail",
 }
