@@ -5,8 +5,11 @@ module.exports = {
     extend: {
       maxWidth: {
         maxContent: "1260px",
+      },
+      height: {
+        '80vh': '80vh',
       }
-    },
+    }
   },
   plugins: [],
 }

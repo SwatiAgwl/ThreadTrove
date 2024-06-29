@@ -12,7 +12,7 @@ export async function getOrders(token){
             if(!response.data.success){
                 throw new Error(response.data.message);
             }
-            toast.success("Displaying Orders"); // toast is getting twice remove it at last
+            //toast.success("Displaying Orders");
             return response.data.data;
         }
         catch(err){
