@@ -6,7 +6,8 @@ const { uploadImageToCloudinary } = require('../utils/imageUploader');
 exports.createProduct= async(req,res)=>{
     try{
         // fetch data
-        const {name,description, price,stock, tag,category}= req.body;
+        const {name,description, price, tag,category}= req.body;
+        console.log("before fetching thumbnail");
         // thumbnail
         const thumbnail= req.files.thumbnailImg;
         console.log("prod fields",name,description,price,tag,category,thumbnail);
@@ -27,13 +28,14 @@ exports.createProduct= async(req,res)=>{
         }
         // upload thumbnail to cloudinary
         const thumbnailImage= await uploadImageToCloudinary(thumbnail, process.env.folder_name);
+        console.log(thumbnailImage.secure_url);
         console.log('uploaded to cloudin succ')
         // create entry in db
         const newProduct= await Product.create({
             name,
             description,
             price,
-            stock,
+            // stock,
             tag,
             category,
             thumbnail: thumbnailImage.secure_url,

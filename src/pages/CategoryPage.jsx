@@ -62,36 +62,72 @@ export const CategoryPage = () => {
     },[categoryId]);
 
 
-  return (
-    <div>
-        <div>
-            {
-            !categoryId ? ( <ErrorPage/>):
-            ( 
-            <div>
-                <div>
-                    <p>Home / {categoryPageData?.selectedCategory?.name}</p>
-                    <p>{categoryPageData?.selectedCategory?.name}: {categoryPageData?.selectedCategory?.products?.length}</p>
-                </div>
-                {/* prouduct cards */}
-                <div>
-                    {
-                    categoryPageData?.selectedCategory?.products?.length !==0 && (
-                        <div  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {
-                            categoryPageData?.selectedCategory?.products.map( (product,index)=> (
-                               <ProductCard product={product} key={index}/>
-                            ))
-                            }
-                        </div>
-                    )
-                }
-                </div>
-            </div>
-            )
-         }
-        </div>
+//   return (
+//     <div>
+//         <div>
+//             {
+//             !categoryId ? ( <ErrorPage/>):
+//             ( 
+//             <div>
+//                 <div>
+//                     <p>Home / {categoryPageData?.selectedCategory?.name}</p>
+//                     <p>{categoryPageData?.selectedCategory?.name}: {categoryPageData?.selectedCategory?.products?.length}</p>
+//                 </div>
+//                 {/* prouduct cards */}
+//                 <div>
+//                     {
+//                     categoryPageData?.selectedCategory?.products?.length !==0 && (
+//                         <div  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+//                             {
+//                             categoryPageData?.selectedCategory?.products.map( (product,index)=> (
+//                                <ProductCard product={product} key={index}/>
+//                             ))
+//                             }
+//                         </div>
+//                     )
+//                 }
+//                 </div>
+//             </div>
+//             )
+//          }
+//         </div>
 
+//     </div>
+//   )
+// }
+return (
+    <div className='w-10/12 max-w-maxContent mx-auto py-6 mb-8'>
+      <div>
+        {!categoryId ? (
+          <ErrorPage />
+        ) : (
+          <div className=' w-full flex flex-col gap-6'>
+            {/* heading */}
+            <div className=''>
+              <p className='text-sm text-gray-500'>
+                Home / {categoryPageData?.selectedCategory?.name}
+              </p>
+              <p className='text-xl font-semibold'>
+                {categoryPageData?.selectedCategory?.name}: {categoryPageData?.selectedCategory?.products?.length}
+              </p>
+            </div>
+            {/* Product cards */}
+            <div>
+              {categoryPageData?.selectedCategory?.products?.length !== 0 ? (
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+                  {categoryPageData?.selectedCategory?.products.map((product, index) => (
+                    <ProductCard product={product} key={index} />
+                  ))}
+                </div>
+              ) : (
+                <p className='text-center text-lg font-semibold text-gray-500'>
+                  No products available in this category.
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+}  

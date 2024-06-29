@@ -84,18 +84,18 @@ export const ProductPage = () => {
     }
 
   return (
-    <div>
-        <div className='flex lg:flex-row max-w-maxContent w-11/12'>
+    <div className='w-full p-10 bg-gray-100'>
+        <div className='max-w-maxContent w-10/12 mx-auto flex flex-col lg:flex-row gap-8 '>
             {/* left part */}
             <div className='w-full'>
-                <img src={productDetails?.thumbnail} alt=''></img>
+                <img src={productDetails?.thumbnail} alt='' className='w-full h-auto rounded-lg shadow-md'></img>
             </div>
             {/* right part */}
-            <div className='w-full'>
-                <p>{productDetails?.name}</p>
-                <p>{productDetails?.description}</p>
-                <p>{productDetails?.price}</p>
-                <div className='flex lg: flex-row w-full gap-2'>
+            <div className='w-full  flex flex-col gap-4 bg-white p-6 rounded-lg shadow-lg h-72'>
+                <p className='text-2xl font-bold'>{productDetails?.name}</p>
+                <p className='text-gray-700'>{productDetails?.description}</p>
+                <p className='text-xl font-semibold text-red-500'>₹{productDetails?.price}</p>
+                <div className='flex lg:flex-row w-full gap-2 mt-4'>
                     <button onClick={()=>bagHandler(productDetails)} className='flex flex-row gap-2 items-center bg-red-500 text-white px-4 py-2 rounded w-[40%]'> 
                         <SlHandbag />Add To Bag
                     </button>               

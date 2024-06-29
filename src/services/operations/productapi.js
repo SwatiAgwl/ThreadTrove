@@ -3,7 +3,7 @@ import { productEndpoints } from "../apis";
 import toast from "react-hot-toast";
 
 
-const {createProduct_api , getProductDetails_api,getAllCategories_api, getCategoryPageData_api} = productEndpoints
+const {createProduct_api , getProductDetails_api,getAllCategories_api, getCategoryPageData_api, createCategory_api} = productEndpoints
 // fetch all categories
 export const fetchCategories= async()=>{
     let result=[];
@@ -26,6 +26,7 @@ export const fetchCategories= async()=>{
 
 // add new product
 export const addProduct= async(data,token)=>{
+    const toastId= toast.loading("Loading...")
     try{
         const response= await apiConnector("POST", createProduct_api,data, {
             // "Content-Type": "multipart/form-data",
@@ -41,6 +42,7 @@ export const addProduct= async(data,token)=>{
         console.log("create product api error ",err);
         toast.error("Couldn't create product");
     }
+    toast.dismiss(toastId)
 }
 
 
@@ -80,4 +82,24 @@ export const fetchProductDetails = async(product_id)=>{
         toast.error("Couldn't fetch the product data");
     }
     return result;
+}
+
+
+// create category
+export const addCategory= async(data,token)=>{
+    try{
+        const response= await apiConnector("POST",createCategory_api,
+             data,{
+                Authorization: `Bearer ${token}`,
+             })
+        console.log("create category api response ",response);
+        if( !response.data.success){
+            throw new Error(response.data.message);
+        }  
+        toast.success("New Category added");  
+    }
+    catch(err){
+        console.log("create category api error ",err);
+        toast.error("Couldn't create Category")
+    }
 }

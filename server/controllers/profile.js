@@ -90,7 +90,7 @@ exports.deleteAccount= async(req,res)=>{
     }
 }
 
-// get all user details
+// get details of a user
 exports.getAllUserDetails = async (req, res) => {
     try {
         const id = req.user.id
@@ -114,7 +114,7 @@ exports.getAllUserDetails = async (req, res) => {
         })
     }
   }
-// get all orders
+// get all orders of a user
 exports.getAllOrders= async(req,res)=>{
     try{
         // fetch data

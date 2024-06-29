@@ -12,10 +12,10 @@ const orderSlice= createSlice({
         setOrderItems (state,action){
             const items= action.payload;
             //state.orderItems.push(item);
-            state.orderItems = [...state.orderItems, ...items];
+            state.orderItems = [...items];
           
         localStorage.setItem("orderItems", JSON.stringify(state.orderItems))
-        toast.success("Items added to orders");
+        //toast.success("Items added to orders");
         }
     }
 })

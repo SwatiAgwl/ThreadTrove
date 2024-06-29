@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { Route,Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
@@ -20,6 +20,10 @@ import { WishlistPage } from './pages/customerPages/WishlistPage';
 import { CreateProduct } from './pages/adminPages/CreateProduct';
 import { CategoryPage } from './pages/CategoryPage';
 import { ProductPage } from './pages/ProductPage';
+import { CreateCategory } from './pages/adminPages/CreateCategory';
+import { AdminSidebar } from './components/AdminSidebar';
+import { Dashboard } from './pages/adminPages/Dashboard';
+import { Navigate } from 'react-router-dom';
 
 function App() {
     const {user}= useSelector((state)=> state.user);
@@ -69,8 +73,15 @@ function App() {
         {
           user?.isAdmin=== true && (
             <>
-              <Route path='/create-product' element={<CreateProduct/>}/>
+   
+            <Route path='/admin' element={<AdminSidebar/>}>
+            
+              <Route path='dashboard' element={<Dashboard/>}></Route>
+              <Route path='create-product' element={<CreateProduct/>}/>
+              <Route path='create-category' element={<CreateCategory/>}/>
+            </Route>
             </>
+            
           )
         }
 

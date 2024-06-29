@@ -18,6 +18,16 @@ const orderItemSchema= new mongoose.Schema({
     price: {
         type: Number,
         //required: true,
+    },
+    date:{
+        type: Date,
+        default: Date.now,
+        required: true,
+    },
+    status: {
+        type: String,
+        default: "Confirmed",
+        required: true,
     }
    
 })

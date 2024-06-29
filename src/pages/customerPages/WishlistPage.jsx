@@ -16,25 +16,25 @@ export const WishlistPage = () => {
   return (
     <div>
         {
-            totItems===0? (<p>Your wishlist is empty</p>): 
+            totItems===0? (<p className='w-10/12 h-screen max-w-maxContent mx-auto flex justify-center mt-10 font-semibold text-2xl '>Your wishlist is empty</p>): 
             (
-                <div className='w-10/12 mx-auto max-w-maxContent'>
-                    <p>My Wishlist: {totItems} items</p>
-                    <div className='grid lg:grid-cols-4'>
+                <div className='w-10/12 mt-8 mx-auto max-w-maxContent space-y-8' >
+                    <p className='text-xl font-semibold'>My Wishlist: {totItems} items</p>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'>
                     {
                         wishlistItems.map( (product,index)=>(
-                            <div className=' w-[210px]'>
-                                <div className='relative h-[280px]'>
-                                    <img src={product.thumbnail} alt='' className='w-full'></img>
+                            <div key={index} className=' w-[220px] border border-gray-200 flex flex-col gap-2'>
+                                <div className='relative h-[294px]'>
+                                    <img src={product.thumbnail} alt='' className='w-full h-full'></img>
                                     <RxCross2 onClick={()=> dispatch(removeFromWishlist(product._id))} className='absolute top-0 right-0 h-7 w-7'/>
                                     
                                 </div>
-                                 {/* cross icon */}
-                                 <div>
-                                    <p>{product.description}</p>
-                                    <p>{product.price}</p>
-                                    <button onClick={()=>btnHandler(product)} className='border border-black'>Move to Bag</button>
+        
+                                 <div className='px-2 '>
+                                    <p className='font-semibold'>{product.name}</p>
+                                    <p className='text-gray-500'>₹{product.price}</p>     
                                 </div>
+                                <button onClick={()=>btnHandler(product)} className='border border-gray-300 text-white bg-red-500 w-full'>Move to Bag</button>
                             </div>
                         )
                         )

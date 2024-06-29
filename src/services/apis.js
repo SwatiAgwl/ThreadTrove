@@ -26,6 +26,7 @@ export const productEndpoints= {
     getProductDetails_api: base_url + "/product/getProductDetails",
     getAllCategories_api: base_url + "/product/getAllCategories",
     getCategoryPageData_api: base_url + "/product/categoryPage",
+    createCategory_api: base_url + "/product/createCategory",
 }
 
 

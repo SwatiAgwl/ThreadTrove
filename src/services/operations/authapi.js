@@ -4,12 +4,15 @@ import { authEndpoints } from "../apis";
 import toast from 'react-hot-toast'
 import { setToken } from "../../slices/authSlice";
 import { setUser } from "../../slices/userSlice";
+import { setLoading } from "../../slices/authSlice";
 
 const {sendOtp_api, login_api, signup_api,resetPasswordToken_api,resetPassword_api}= authEndpoints;
 
 
 export function sendOtp(email, navigate){
     return async(dispatch) =>{
+        const toastId = toast.loading("Loading...")
+        dispatch(setLoading(true));
         try{
             const response= await apiConnector("POST", sendOtp_api,{email});
             console.log("send otp api response ",response);
@@ -23,6 +26,8 @@ export function sendOtp(email, navigate){
             console.log("send otp api error ",err);
             toast.error("Couldn't send OTP")
         }
+        dispatch(setLoading(false));
+        toast.dismiss(toastId)
     }
 }
 
@@ -30,6 +35,8 @@ export function sendOtp(email, navigate){
 export function signup(name,email,password,confirmPassword,phoneNum, otp,navigate){
 
     return async(dispatch)=>{
+        const toastId = toast.loading("Loading...")
+        dispatch(setLoading(true));
         try{
             const response= await apiConnector("POST", signup_api,{name,email,password,confirmPassword,phoneNum,otp})
             console.log("sign up api response ", response);
@@ -43,12 +50,17 @@ export function signup(name,email,password,confirmPassword,phoneNum, otp,navigat
             console.log("sign up api error ",err);
             toast.error(`Couldn't sign up api ${err}`)
         }
+
+        dispatch(setLoading(false));
+        toast.dismiss(toastId)
     }
 }
 
 
 export function login(email,password,navigate){
     return async(dispatch)=>{
+        const toastId = toast.loading("Loading...")
+        dispatch(setLoading(true));
         try{
             const response= await apiConnector("POST", login_api, {email,password});
             console.log("login api response ",response);
@@ -69,6 +81,8 @@ export function login(email,password,navigate){
             console.log("log in api error ",err);
             toast.error(`Couldn't login, ${err}`)
         }
+        dispatch(setLoading(false));
+        toast.dismiss(toastId)
     }
 }
 
@@ -87,6 +101,7 @@ export function logout(navigate) {
 
 export function resetPasswordToken(email, setEmailSent){
     return async(dispatch)=>{
+        dispatch(setLoading(true));
         try{
             console.log("email",email);
             console.log(resetPasswordToken_api);
@@ -102,12 +117,14 @@ export function resetPasswordToken(email, setEmailSent){
             console.log("reset password token api error ",err);
             toast.error("Unable to send mail")
         }
+        dispatch(setLoading(false));
     }
 }
 
 
 export function resetPassword(password, confirmPassword, token){
     return async(dispatch)=>{
+        dispatch(setLoading(true));
         try{
             const response= await apiConnector("POST",resetPassword_api, {password,confirmPassword,token});
             console.log("reset pwd api response ",response);
@@ -121,5 +138,6 @@ export function resetPassword(password, confirmPassword, token){
             console.log("reset pwd api error ",err);
             toast.error("Unable to reset password")
         }
+        dispatch(setLoading(false));
     }
 }

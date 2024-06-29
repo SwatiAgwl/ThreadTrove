@@ -5,7 +5,7 @@ import { apiConnector } from "../apiConnector";
 const {getAllOrders_api}= profileEndpoints
 
 export async function getOrders(token){
-    
+    const toastId = toast.loading("Loading...")
         try{
             const response= await apiConnector("GET",getAllOrders_api,null,{Authorization: `Bearer ${token}`});
             console.log("get all orders api response ",response);
@@ -18,5 +18,8 @@ export async function getOrders(token){
         catch(err){
             console.log("Error in get all orders api ",err);
             toast.error("Unable to fetch orders")
+        }
+        finally{
+        toast.dismiss(toastId)
         }
 }

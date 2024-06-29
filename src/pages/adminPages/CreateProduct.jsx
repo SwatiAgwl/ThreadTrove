@@ -7,9 +7,11 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProduct } from '../../slices/productSlice';
 import { addProduct } from '../../services/operations/productapi';
+import { editableInputTypes } from '@testing-library/user-event/dist/utils';
 
 export const CreateProduct = () => {
     const {token}= useSelector((state)=>state.auth);
+    //const [file, setFile] = useState('https://res.cloudinary.com/deywnqlkv/image/upload/v1719319851/KalaMandir/qg5ijvluj5nigyoamfaf.webp');
     const dispatch= useDispatch();
     const{
         register,
@@ -19,7 +21,7 @@ export const CreateProduct = () => {
         formState: {errors},
     }= useForm();
 
-    const [categories,  setCategories]= useState([]); // why using useState can directly have categories= await fetch()
+    const [categories,  setCategories]= useState([]); 
     const getCategories= async()=>{
         const categories= await fetchCategories();
         if( categories.length >0){
@@ -30,8 +32,23 @@ export const CreateProduct = () => {
     useEffect(()=>{
         getCategories();
     },[])
+
+    // useEffect(() => {
+    //     if (file) {
+    //       console.log("Selected file:", file);
+    //     }
+    //   }, [file]);
+
+    // const imageHandler= (e)=> {
+    //     console.log("calling handle change")
+    //     console.log("printing ",e.target.files);
+    //     setFile(URL.createObjectURL(e.target.files[0]));
+    //     console.log(file);
+    // }
+
     const onSubmit= async(data)=>{
         // create new product
+        console.log("thumbnail ",data.thumbnail);
         const formData= new FormData();
         // const productPrice = parseFloat(data.productPrice);
 
@@ -39,7 +56,7 @@ export const CreateProduct = () => {
         formData.append("description",data.productDescription)
         formData.append("category",data.productCategory)
         formData.append("price",data.productPrice)
-        //formData.append("thumbnail",data.productThumbnail)
+        formData.append("thumbnailImg",data.thumbnail[0])
         formData.append("tag",JSON.stringify(data.tags))
 
         const result= await addProduct(formData,token);
@@ -115,6 +132,20 @@ export const CreateProduct = () => {
                         name="tags"
                     />
                     {/* thumbnail */}
+
+                    <div className="flex flex-col">
+                        <label htmlFor='thumbnail'  className="mb-2 text-sm font-medium text-gray-700">Product Thumbnail<sup className="text-red-500">*</sup></label>
+                        <input
+                            id='thumbnail'
+                            type='file'
+                            //onChange={(e)=>imageHandler(e)}
+                            {...register("thumbnail", {required: true,})}
+                        ></input>
+                        {/* { file && <img src={file} alt='' />}
+                            {errors.thumbnail && (
+                            <span className="text-red-500 text-sm mt-1">Product thumbnail is required.</span>
+                        )} */}
+                    </div>
     
                     <div className="flex flex-col">
                         <label htmlFor="productDescription" className="mb-2 text-sm font-medium text-gray-700">Product Description<sup className="text-red-500">*</sup></label>
@@ -129,7 +160,9 @@ export const CreateProduct = () => {
                         )}
                     </div>
     
-                    <button className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">Create</button>
+                    <button type='submit' className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 ">
+                        Create
+                    </button>
                 </form>
             </div>
         </div>

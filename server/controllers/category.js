@@ -13,6 +13,14 @@ exports.createCategory= async(req,res)=>{
                 message: "category name is required"
             })
         }
+        // check if category already exists
+        const result= await Category.findOne({name:name});
+        if( result){
+            return res.json({
+                success: false,
+                message: "Category already exists"
+            })
+        }
         // create entry in db
         const category= await Category.create({name: name});
         // ret res

@@ -80,11 +80,11 @@ exports.verifySignature = async (req, res) => {
     const prod_ids = req.body?.prod_ids
   
     const user_id = req.user.id
-    console.log(razorpay_order_id)
-    console.log(razorpay_payment_id)
-    console.log(razorpay_signature)
-    console.log( prod_ids)
-    console.log( user_id)
+    // console.log(razorpay_order_id)
+    // console.log(razorpay_payment_id)
+    // console.log(razorpay_signature)
+    // console.log( prod_ids)
+    // console.log( user_id)
   
     if (
       !razorpay_order_id ||
@@ -168,6 +168,7 @@ const addOrder = async (prod_ids, user_id, res) => {
         totalPrice += product.price;
         const orderItem = new OrderItem({
               product: prodId,
+              date: Date.now(),
         });
 
           await orderItem.save();
@@ -218,16 +219,21 @@ exports.sendPaymentSuccessEmail = async (req, res) => {
   
     try {
       const user = await User.findById(userId)
-  
+      console.log("before sending mail...")
       await mailSender(
         user.email,
         ` ${user.name},
-          amount / 100,
-          orderId,
-          paymentId
+          Total Amount: ${amount/ 100},
+          Order id: ${orderId},
+          Payment id: ${paymentId},
         `,
         `Payment Received`,
       )
+      console.log("after sending mail ...")
+      return res
+            .status(200)
+            .json({ success: true, message: "Email sent successfully" });
+      
     } 
     catch (error) {
       console.log("error in sending payment succ mail", error)
@@ -355,234 +361,3 @@ exports.sendPaymentSuccessEmail = async (req, res) => {
 
 
 
-// 2nd
-
-// // capture payment
-// exports.capturePayment = async (req, res) => {
-//     // fetch productIds and userId
-//     const { productIds } = req.body;
-//     const userId = req.user.id;
-
-//     // validate - productIds
-//     if (!productIds || !Array.isArray(productIds) || productIds.length === 0) {
-//         return res.json({
-//             success: false,
-//             message: "Please provide valid product IDs"
-//         });
-//     }
-
-//     let products;
-//     try {
-//         products = await Product.find({ _id: { $in: productIds } });
-//         if (products.length !== productIds.length) {
-//             return res.json({
-//                 success: false,
-//                 message: "Couldn't find all product details"
-//             });
-//         }
-//     } catch (err) {
-//         return res.json({
-//             success: false,
-//             message: err.message,
-//         });
-//     }
-
-//     // calculate total amount
-//     const amount = products.reduce((total, product) => total + product.price, 0);
-//     const currency = "INR";
-
-//     // create order options
-//     const options = {
-//         amount: amount * 100,  // Amount in paise
-//         currency,
-//         receipt: `${Math.random().toString(36).substr(2, 9)}_${Date.now()}`,
-//         notes: {
-//             product_ids: productIds.join(','),
-//             user_id: userId,
-//         }
-//     };
-
-//     try {
-//         const paymentResponse = await instance.orders.create(options);
-//         console.log("payment response(order creation) ", paymentResponse);
-
-//         // return response
-//         return res.status(200).json({
-//             success: true,
-//             product_names: products.map(product => product.name),
-//             order_id: paymentResponse.id,
-//             message: "Order created successfully, payment is initiated"
-//         });
-//     } catch (err) {
-//         return res.json({
-//             success: false,
-//             message: "Error occurred while creating order"
-//         });
-//     }
-// }
-
-
-
-// // verify signature of razorpay and server
-// exports.verifySignature = async (req, res) => {
-//     const webhookSecret = "12345678";
-//     const signature = req.headers["x-razorpay-signature"];
-//     const shasum = crypto.createHmac("sha256", webhookSecret);
-//     shasum.update(JSON.stringify(req.body));
-//     const digest = shasum.digest("hex");
-
-//     if (signature === digest) {
-//         console.log("Payment is authorized");
-
-//         const { product_ids, user_id } = req.body.payload.payment.entity.notes;
-
-//         try {
-//             // find the user and add this order in their orders
-//             const userDetails = await User.findById(user_id);
-//             if (!userDetails) {
-//                 return res.status(404).json({
-//                     success: false,
-//                     message: "User not found"
-//                 });
-//             }
-
-//             // You might want to add order details to the user's orders array here
-//              userDetails.orders.push({ order_id: paymentResponse.id, products: product_ids });
-
-//             // Save updated user details (if modifying the user document)
-//             await userDetails.save();
-
-//             // send order confirmation mail
-//             const emailResponse = await mailSender(
-//                 userDetails.email,
-//                 "Your products are ordered successfully",
-//                 "Congratulations! from KalaMandir"
-//             );
-
-//             console.log(emailResponse);
-//             return res.status(200).json({
-//                 success: true,
-//                 message: "Signature verified and products ordered"
-//             });
-//         } catch (err) {
-//             console.log("error", err);
-//             return res.json({
-//                 success: false,
-//                 message: "Error occurred after authorizing payment while adding order to user or sending order confirmation mail"
-//             });
-//         }
-//     } else {
-//         return res.status(400).json({
-//             success: false,
-//             message: "Invalid request, payment secrets didn't match"
-//         });
-//     }
-// }
-
-
-
-
-
-
-// 3rd
-
-// exports.capturePayment = async (req, res) => {
-//     const { productIds } = req.body;
-//     const userId = req.user.id;
-
-//     // Validate input
-//     if (!productIds || !Array.isArray(productIds) || productIds.length === 0) {
-//         return res.json({
-//             success: false,
-//             message: "Please provide valid product IDs"
-//         });
-//     }
-
-//     let products;
-//     try {
-//         products = await Product.find({ _id: { $in: productIds } });
-//         if (products.length !== productIds.length) {
-//             return res.json({
-//                 success: false,
-//                 message: "Couldn't find all product details"
-//             });
-//         }
-//     } catch (err) {
-//         return res.json({
-//             success: false,
-//             message: err.message,
-//         });
-//     }
-
-//     let totalPrice = 0;
-//     const orderItems = [];
-
-//     try {
-//         for (let i = 0; i < products.length; i++) {
-//             const product = products[i];
-          
-//             const orderItem = new OrderItem({
-//                 order: null, // This will be set after creating the order
-//                 product: product._id,
-//                 price: product.price,
-//             });
-//             await orderItem.save();
-//             orderItems.push(orderItem);
-//             totalPrice += product.price ;
-//         }
-
-//         const newOrder = new Order({
-//             user: userId,
-//             totalPrice,
-//             status: 'Pending',
-//             items: orderItems.map(item => item._id),
-//         });
-//         await newOrder.save();
-
-//         // Update order items to reference the created order
-//         for (let orderItem of orderItems) {
-//             orderItem.order = newOrder._id;
-//             await orderItem.save();
-//         }
-
-//         // Create payment options
-//         const options = {
-//             amount: totalPrice * 100,  // Amount in paise
-//             currency: "INR",
-//             receipt: `${Math.random().toString(36).substr(2, 9)}_${Date.now()}`,
-//             notes: {
-//                 order_id: newOrder._id.toString(),
-//                 user_id: userId,
-//             }
-//         };
-
-//         const paymentResponse = await instance.orders.create(options);
-//         console.log("payment response(order creation) ", paymentResponse);
-
-//         // Find the user and update their orders array
-//         const userDetails = await User.findById(userId);
-//         userDetails.orders.push(newOrder._id);
-//         await userDetails.save();
-
-//         // Send confirmation email
-//         const emailResponse = await mailSender(
-//             userDetails.email,
-//             "Your products are ordered successfully..",
-//             "Congratulations! from KalaMandir"
-//         );
-//         console.log(emailResponse);
-
-//         // Return response
-//         return res.status(200).json({
-//             success: true,
-//             product_names: products.map(product => product.name),
-//             order_id: paymentResponse.id,
-//             message: "Order created successfully, payment is initiated"
-//         });
-//     } catch (err) {
-//         return res.json({
-//             success: false,
-//             message: "Error occurred while creating order"
-//         });
-//     }
-// }

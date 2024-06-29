@@ -3,6 +3,7 @@ import { paymentEndpoints } from "../apis"
 import toast from "react-hot-toast";
 import { setOrderItems } from "../../slices/orderSlice";
 import { getOrders } from "./profileapi";
+// import { setPaymentLoading } from "../../slices/productSlice";
 
 const {capturePayment_api,verifySignature_api,sendEmailSucc_api}= paymentEndpoints
 
@@ -22,6 +23,8 @@ function loadScript(src) {
 }
 
 export const buyProduct= async(token, prod_ids,userDetails,navigate,dispatch)=>{
+    // const toastId = toast.loading("Loading...");
+    // dispatch(setPaymentLoading(true))
     try{
         // load script
         const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
@@ -57,11 +60,11 @@ export const buyProduct= async(token, prod_ids,userDetails,navigate,dispatch)=>{
                 name:`${userDetails.firstName}`, // Prefilled user name to make the checkout process faster.
                 email:userDetails.email
             },
-            handler: function(response) { // Callback function that is called after the payment is successful.
+            handler: async function(response) { // Callback function that is called after the payment is successful.
                 //send successful/payment received  mail
-                sendPaymentReceivedEmail(response, orderResponse.data.data.amount,token );
+                await sendPaymentReceivedEmail(response, orderResponse.data.data.amount,token );
                 //verify signature
-                verifySignature({...response, prod_ids}, token, navigate, dispatch);
+                await verifySignature({...response, prod_ids}, token, navigate, dispatch);
             }
         }
        
@@ -78,12 +81,15 @@ export const buyProduct= async(token, prod_ids,userDetails,navigate,dispatch)=>{
         console.log("create order payment api error ",err);
         toast.error(err);
     }
+    // toast.dismiss(toastId);
+    // dispatch(setPaymentLoading(false));
 }
 
 
 // send payment success / received mail
 async function sendPaymentReceivedEmail(response,amount,token){
     try{
+        console.log("before in frontend...")
        const res= await apiConnector("POST", sendEmailSucc_api,
             {
              orderId: response.razorpay_order_id,
@@ -92,6 +98,7 @@ async function sendPaymentReceivedEmail(response,amount,token){
             },
             {Authorization: `Bearer ${token}`}
         )
+        console.log("after in frontend...")
         console.log("payment received/success mail ",res);
         if(!res.data.success) {
             throw new Error(res.data.message);
@@ -106,6 +113,8 @@ async function sendPaymentReceivedEmail(response,amount,token){
 
 // verify signature
 async function verifySignature(bodyData, token, navigate, dispatch){
+    // const toastId = toast.loading("Verifying Payment....");
+    // dispatch(setPaymentLoading(true));
     try{
         console.log("before api call ")
         const response = await apiConnector("POST",verifySignature_api,
@@ -123,7 +132,7 @@ async function verifySignature(bodyData, token, navigate, dispatch){
                 res.forEach(order => {
                     order.items.forEach(item => {
                         console.log("product going in dispatch order ",item.product.name);
-                        allOrderItems.push(item.product);  // product populate kia hua hai 
+                        allOrderItems.push(item);  // product populate kia hua hai 
                     });
                   });
                   dispatch(setOrderItems(allOrderItems));
@@ -136,6 +145,8 @@ async function verifySignature(bodyData, token, navigate, dispatch){
         console.log("verify signature api error ", error);
         toast.error("Could not verify Payment");
     }
+    // toast.dismiss(toastId);
+    // dispatch(setPaymentLoading(false));
 }
 
 // add order in user model        added these fn in verifySignature backend fn
