@@ -19,7 +19,7 @@ export const HeroSection = () => {
     <div className='h-80vh '>
       <Swiper
         modules={[ Pagination, A11y,Autoplay]}
-        spaceBetween={0}
+        spaceBetween={5}
         slidesPerView={1}
         pagination={{ clickable: true }}
         autoplay={{ delay: 2000, disableOnInteraction: true }}
@@ -56,7 +56,7 @@ export const HeroSection = () => {
         </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className='flex items-center justify-center h-full bg-red-300'>
+          <div className='flex items-center justify-center h-full bg-gradient-to-t from-yellow-100 via-white to-yellow-100'>
             <img src={sale} alt='' className='w-full h-auto'></img>
           </div>
         </SwiperSlide>
@@ -67,7 +67,8 @@ export const HeroSection = () => {
              backgroundPosition: 'center',
              backgroundRepeat: 'no-repeat' }}
             >
-            <img src={suit} alt='' className='max-w-full h-auto absolute top-24 right-16'></img>
+            {/* <img src={suit} alt='' className='max-w-full h-auto absolute top-24 right-16  sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl'></img> */}
+            <img src={suit} alt='' className='max-w-full h-auto absolute bottom-0 right-12  sm:top-20 sm:right-12 md:top-16 md:right-8 lg:top-12 lg:right-4 xl:top-24 xl:right-16'></img>
           </div>
         </SwiperSlide>
 

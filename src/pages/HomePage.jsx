@@ -1,7 +1,7 @@
 import React from 'react';
 
 import suitImage1 from '../assets/suit4.png';
-import suitImage2 from '../assets/suit2.jpeg';
+import suitImage2 from '../assets/suit3.jpeg';
 import suitImage3 from '../assets/suit3.jpeg';
 import suitImage5 from '../assets/suit5.jpg';
 import suitImage7 from '../assets/suit7.jpeg';
@@ -16,26 +16,7 @@ export const HomePage = () => {
     <div className='w-full h-full'>
       {/* Hero Section */}
       <HeroSection/>
-      {/* <div className='bg-gradient-to-t from-blue-200 to-cyan-200 min-h-screen flex items-center justify-center'>
-        <div className='w-11/12 lg:w-10/12 mx-auto max-w-7xl flex flex-col lg:flex-row items-center justify-between space-y-10 lg:space-y-0'>
-          <div className='flex flex-col items-center lg:items-start text-center lg:text-left'>
-            <h1 className='text-4xl md:text-5xl font-bold mb-4 animate-fade-in'>
-              Stay In Style With The <br className='hidden lg:block' /> Latest Trends & Fashion
-            </h1>
-            <h2 className='text-lg md:text-xl mb-6 text-gray-700 animate-fade-in'>
-              Express your inner style with our vast collection of clothing
-            </h2>
-            <button className='bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 transition duration-300 animate-bounce'>
-              Shop Now
-            </button>
-          </div>
-          <div className='relative w-full lg:w-1/2'>
-            <div className='w-full h-full flex items-center justify-center p-8 animate-fade-in'>
-              <img src={homeimg} alt='Fashion' className='max-w-full h-auto'></img>
-            </div>
-          </div>
-        </div>
-      </div> */}
+      
 
       {/* Best Selling Section */}
       <div className='w-11/12 lg:w-10/12 mx-auto mt-20 mb-20 h-70vh flex flex-col gap-12'>
@@ -52,7 +33,7 @@ export const HomePage = () => {
       </div>
 
       {/* Women's Wear Section */}
-      <div className='h-90vh w-10/12 mx-auto rounded-xl bg-gradient-to-r from-orange-100 via-pink-100 to-yellow-100 mt-10 flex items-center py-5'>
+      <div className='h-90vh w-10/12 mx-auto rounded-xl bg-gradient-to-r from-orange-100 via-pink-100 to-yellow-100 mt-10 flex items-center py-5 px-4'>
         <div className='w-11/12 lg:w-10/12 max-w-screen-xl mx-auto h-full flex flex-col lg:flex-row items-center animate-fade-in'>
           <div className='w-full lg:w-1/2 h-full flex items-center'>
             <p className='text-3xl md:text-4xl text-gray-800 font-bold mb-6 lg:mb-0'>Women's Wear</p>
@@ -74,13 +55,13 @@ export const HomePage = () => {
 
 
       {/* video */}
-      <div className="w-10/12 mx-auto m-12 bg-gray-100 py-12 px-24 ">
-      <video  className="w-96 h-96 mx-auto" controls muted autoPlay>
+      <div className="w-10/12 mx-auto m-14 bg-white md:py-12 md:px-24 ">
+      <video  className="w-full h-96 mx-auto shadow-2xl rounded-md  " controls muted autoPlay>
       <source src={vid} type="video/mp4"/>
       </video>
       </div>
       {/* Men's Wear Section */}
-      <div className='h-90vh bg-gradient-to-r from-blue-100 via-green-100 to-teal-100 mt-10 flex items-center w-10/12 rounded-2xl mx-auto mb-4 py-5'>
+      <div className='h-90vh bg-gradient-to-r from-blue-100 via-green-100 to-teal-100 mt-10 flex items-center w-10/12 rounded-2xl mx-auto mb-4 py-5 px-4'>
         <div className='w-11/12 lg:w-10/12 max-w-screen-xl mx-auto h-full flex flex-col lg:flex-row-reverse items-center animate-fade-in'>
           <div className='w-full lg:w-1/2 h-full flex lg:flex-row-reverse items-center'>
             <p className='text-3xl md:text-4xl text-gray-800 font-bold mb-6 lg:mb-0'>Men's Wear</p>

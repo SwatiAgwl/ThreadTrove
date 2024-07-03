@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import { profileEndpoints } from "../apis";
 import { apiConnector } from "../apiConnector";
 
-const {getAllOrders_api}= profileEndpoints
+const {getAllOrders_api, editProfile_api}= profileEndpoints
 
 export async function getOrders(token){
     const toastId = toast.loading("Loading...")
@@ -22,4 +22,26 @@ export async function getOrders(token){
         finally{
         toast.dismiss(toastId)
         }
+}
+
+
+export async function editProfile(token, formData){
+    const toastId = toast.loading("Loading...")
+    try{
+        const response= await apiConnector("POST",editProfile_api,formData,{
+            Authorization: `Bearer ${token}`
+        })
+        console.log("edit profile api response ",response);
+        if( !response.data.success){
+            throw new Error(response.data.message);
+        }
+        toast.success("Profile updated");
+    }
+    catch(err){
+        console.log("edit profile api errror ",err);
+        toast.error("Unable to edit profile");
+    }
+    finally{
+        toast.dismiss(toastId)
+    }
 }

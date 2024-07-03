@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 export const ConfirmationModal = ({modalData}) => {
     
   return (
-    <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-100'>
-        <div className='bg-white p-4 rounded shadow-lg z-50 '>
+    <div className='fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-100 '>
+        <div className='bg-white p-4 rounded shadow-lg z-100 '>
             <p className='text-xl font-semibold'>{modalData.text1}</p>
             <p>{modalData.text2}</p>
             <div className='flex flex-row gap-2 mt-4'>

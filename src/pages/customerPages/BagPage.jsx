@@ -102,7 +102,7 @@ return (
           </div>
         </div>
       ) : (
-        <p className='text-xl text-center'>Your bag is empty</p>
+        <p className='text-xl text-center h-screen'>Your bag is empty</p>
       )}
     </div>
   );

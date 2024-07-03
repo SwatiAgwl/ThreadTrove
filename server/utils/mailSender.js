@@ -1,6 +1,6 @@
 const nodemailer= require('nodemailer');
 
-const mailSender= async(email, body, title)=>{
+const mailSender= async(email, body, title,from)=>{
     console.log("mail user",process.env.mail_user);
     try{
         let transporter= nodemailer.createTransport({
@@ -12,7 +12,7 @@ const mailSender= async(email, body, title)=>{
         })
 
         let info= await transporter.sendMail({
-            from: "Kala Mandir Silk Centre, Derabassi",
+            from: from || ' "Kala Mandir Silk Centre, Derabassi" <kalamandir852@gmail.com>',
             to: `${email}`,
             subject: `${title}`,
             html: `${body}`,

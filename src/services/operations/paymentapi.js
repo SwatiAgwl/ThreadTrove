@@ -23,7 +23,7 @@ function loadScript(src) {
 }
 
 export const buyProduct= async(token, prod_ids,userDetails,navigate,dispatch)=>{
-    // const toastId = toast.loading("Loading...");
+     const toastId = toast.loading("Loading...");
     // dispatch(setPaymentLoading(true))
     try{
         // load script
@@ -81,13 +81,14 @@ export const buyProduct= async(token, prod_ids,userDetails,navigate,dispatch)=>{
         console.log("create order payment api error ",err);
         toast.error(err);
     }
-    // toast.dismiss(toastId);
+     toast.dismiss(toastId);
     // dispatch(setPaymentLoading(false));
 }
 
 
 // send payment success / received mail
 async function sendPaymentReceivedEmail(response,amount,token){
+    const toastId = toast.loading("Loading...");
     try{
         console.log("before in frontend...")
        const res= await apiConnector("POST", sendEmailSucc_api,
@@ -108,12 +109,13 @@ async function sendPaymentReceivedEmail(response,amount,token){
         console.log("sending payment received email api error ",err);
         toast.error(err);
     }
+    toast.dismiss(toastId);
 }
 
 
 // verify signature
 async function verifySignature(bodyData, token, navigate, dispatch){
-    // const toastId = toast.loading("Verifying Payment....");
+     const toastId = toast.loading("Verifying Payment....");
     // dispatch(setPaymentLoading(true));
     try{
         console.log("before api call ")
@@ -145,7 +147,7 @@ async function verifySignature(bodyData, token, navigate, dispatch){
         console.log("verify signature api error ", error);
         toast.error("Could not verify Payment");
     }
-    // toast.dismiss(toastId);
+     toast.dismiss(toastId);
     // dispatch(setPaymentLoading(false));
 }
 

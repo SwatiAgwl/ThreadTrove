@@ -1,9 +1,10 @@
+//
 const express= require('express');
 const router= express.Router();
 
 // method , route , handler
 const {updateProfile,deleteAccount,getAllOrders,getAllUserDetails}= require('../controllers/profile');
-const {auth,isCustomer,Admin}= require('../middlewares/auth');
+const {auth}= require('../middlewares/auth');
 
 router.post('/updateProfile', auth,updateProfile);
 router.delete('/deleteAccount',auth, deleteAccount);

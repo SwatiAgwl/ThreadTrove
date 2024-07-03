@@ -1,13 +1,16 @@
 const User= require('../models/user');
 const Profile= require('../models/profile');
-const Order= require('../models/order')
+const Order= require('../models/order');
+const profile = require('../models/profile');
 
 
 // update profile
 exports.updateProfile= async(req, res)=>{
     try{
         // fetch data
-        const {gender,dob="",city,state,country}= req.body;
+        console.log("inside update fn")
+        const {phoneNum,gender,dob="",city,state,country}= req.body;
+        console.log("after fetching details");
         if( !gender || !city || !state || !country){
             return res.json({
                 success: false,
@@ -17,17 +20,19 @@ exports.updateProfile= async(req, res)=>{
         // get user id
         const userId= req.user.id;
         
-        const userDetails= await User.findById(userId);
-        // if( !userDetails){
-        //     return res.json({
-        //         success: false,
-        //         message: "user not found",
-        //     })
-        //} no need
-
+        
+        console.log("after checking details");
+        const userDetails= await User.findByIdAndUpdate(userId,{
+            phoneNum,
+        });
+        console.log("user id ",userId);
+        console.log("user details ",userDetails);
+        await userDetails.save();
+       
+        console.log("after saving user");
         // get profile id
         const profileId= userDetails.additionalDetails;
-        await Profile.findByIdAndUpdate(
+        const profile= await Profile.findByIdAndUpdate(
             {_id: profileId},
             {
                 gender: gender,
@@ -39,10 +44,15 @@ exports.updateProfile= async(req, res)=>{
             {new: true},
 
         )
+        await profile.save();
+        const updatedUserDetails = await User.findById(userId)
+                                    .populate("additionalDetails")
+                                    .exec()
         // ret res
         return res.status(200).json({
             success: true,
             message: "Profile updated successfully",
+            data: updatedUserDetails
         })
 
     }

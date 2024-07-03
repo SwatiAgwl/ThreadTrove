@@ -18,9 +18,11 @@ export const authEndpoints= {
 
 // profile endpoints
 export const profileEndpoints= {
-    getAllOrders_api: base_url + "/profile/getAllOrders"
+    getAllOrders_api: base_url + "/profile/getAllOrders",
+    editProfile_api: base_url + "/profile/updateProfile"
 }
 
+// product
 export const productEndpoints= {
     createProduct_api: base_url + "/product/createProduct",
     getProductDetails_api: base_url + "/product/getProductDetails",
@@ -29,9 +31,14 @@ export const productEndpoints= {
     createCategory_api: base_url + "/product/createCategory",
 }
 
-
+// payment
 export const paymentEndpoints= {
     capturePayment_api : base_url + "/payment/capturePayment",
     verifySignature_api : base_url + "/payment/verifySignature",
     sendEmailSucc_api : base_url + "/payment/sendPaymentSuccessEmail",
+}
+
+// contact
+export const contactEndpoints= {
+    contactUs_api : base_url + "/contact/us"
 }

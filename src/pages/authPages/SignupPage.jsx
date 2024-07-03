@@ -94,6 +94,7 @@ return (
             name='phoneNumber'
             placeholder='Phone Number'
             minLength={10}
+            maxLength={10}
           />
           <button className='w-full bg-blue-600 hover:bg-blue-700 text-white text-xl py-3 rounded-lg transition duration-200'>
             Create Account
