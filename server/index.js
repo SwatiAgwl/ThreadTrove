@@ -23,7 +23,7 @@ database.dbConnect();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin:  ['https://kala-mandir.vercel.app', 'http://localhost:3000'],
     credentials: true,
 }))
 app.use(fileUpload({  
