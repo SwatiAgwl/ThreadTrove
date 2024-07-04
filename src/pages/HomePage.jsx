@@ -1,12 +1,20 @@
 import React from 'react';
 
-import suitImage1 from '../assets/suit4.png';
-import suitImage2 from '../assets/suit3.jpeg';
+// import suitImage1 from '../assets/suit4.png';
+import suitImage2 from '../assets/suit2.jpeg'
 import suitImage3 from '../assets/suit3.jpeg';
 import suitImage5 from '../assets/suit5.jpg';
 import suitImage7 from '../assets/suit7.jpeg';
-import top from '../assets/top.webp';
+import top from '../assets/Top1.jpeg';
+import best from '../assets/best.jpeg';
+import set from '../assets/set.jpg'
+import set2 from '../assets/set2.jpg'
 import lehenga from '../assets/lehenga.jpg';
+
+import tshirt from '../assets/tshirt.webp'
+import shirt from '../assets/shirt.jpg'
+import kurta from '../assets/kurta.avif'
+import kurta2 from '../assets/kurta2.jpeg'
 import vid from '../assets/women.mp4'
 import homeimg from '../assets/suit-removebg-preview.png';
 import { HeroSection } from '../components/HeroSection';
@@ -23,7 +31,7 @@ export const HomePage = () => {
         <h2 className='text-4xl font-semibold mx-auto text-center '>BEST SELLING</h2>
         <div className='w-20 h-1 bg-gray-500 mx-auto mb-4'></div>
         <div className='flex flex-wrap justify-center gap-8'>
-          {[suitImage1, suitImage2, suitImage3, suitImage5].map((image, index) => (
+          {[ suitImage2, kurta,set2, best].map((image, index) => (
             <div key={index} className='transform relative overflow-hidden hover:scale-105 transition-transform duration-300'>
               <img className='w-48 h-64 md:w-52 md:h-72 object-cover rounded-lg shadow-lg' src={image} alt='' />
               <div className='absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'></div>
@@ -39,7 +47,7 @@ export const HomePage = () => {
             <p className='text-3xl md:text-4xl text-gray-800 font-bold mb-6 lg:mb-0'>Women's Wear</p>
           </div>
           <div className='w-full lg:w-1/2 grid grid-cols-2 gap-6'>
-            {[lehenga, suitImage5, top, suitImage7].map((image, index) => (
+            {[lehenga, suitImage5, top, set].map((image, index) => (
               <div className='relative w-full h-full' key={index}>
                 <img
                   src={image}
@@ -67,7 +75,7 @@ export const HomePage = () => {
             <p className='text-3xl md:text-4xl text-gray-800 font-bold mb-6 lg:mb-0'>Men's Wear</p>
           </div>
           <div className='w-full lg:w-1/2 grid grid-cols-2 gap-6'>
-            {[suitImage1, suitImage2, suitImage3, suitImage5].map((image, index) => (
+            {[kurta2, shirt, kurta, tshirt].map((image, index) => (
               <div className='relative w-full h-full' key={index}>
                 <img
                   src={image}

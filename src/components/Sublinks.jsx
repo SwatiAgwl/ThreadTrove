@@ -23,7 +23,7 @@ return (
     {item === title && (
       // <div className='absolute top-full left-0 mt-6 z-10 bg-white border border-gray-200 w-48 shadow-lg'>
       <div 
-      className='absolute top-full left-0 mt-2 z-10 bg-white border border-gray-200 w-48 shadow-lg group-hover:block'
+      className='absolute top-full left-0 mt-3 z-10 bg-white border border-gray-200 w-48 shadow-lg group-hover:block'
       onMouseOver={() => setItem(title)}
       onMouseOut={() => setItem('')}
       >
