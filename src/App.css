@@ -16,3 +16,23 @@ html,body{
 .animate-fade-in {
   animation: fadeIn 1s ease-in-out;
 }
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.animated-gradient-text {
+  background: linear-gradient(-45deg, #d7263d, #ff2e63, #ff6f61, #f77f00, #ffba08, #d7263d);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-animation 5s ease infinite;
+}
+

@@ -56,7 +56,7 @@ export const HeroSection = () => {
         </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className='flex items-center justify-center h-full bg-gradient-to-t from-yellow-100 via-white to-yellow-100'>
+          <div className='flex items-center justify-center h-full bg-gradient-to-t from-yellow-300 via-white to-yellow-300'>
             <img src={sale} alt='' className='w-full h-auto'></img>
           </div>
         </SwiperSlide>
