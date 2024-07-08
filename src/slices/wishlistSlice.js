@@ -44,7 +44,7 @@ const wishlistSlice= createSlice({
                 localStorage.setItem("wishlistItems", JSON.stringify(state.wishlistItems));
                 localStorage.setItem("totItems", JSON.stringify(state.totItems));
 
-                //toast.error("Item removed from wishlist")
+                toast.error("Item removed from wishlist")
             }
 
         }

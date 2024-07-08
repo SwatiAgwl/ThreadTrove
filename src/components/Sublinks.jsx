@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
-export const Sublinks = ({ title, item, setItem, categoryLinks }) => {
+export const Sublinks = ({ title, item, setItem, categoryLinks,setMenuOpen }) => {
   
   //const [mappedCategories, setMappedCategories]= useState([]);
   const mappedCategories= new Set();
@@ -38,6 +38,7 @@ return (
                 <Link
                   to={`/category/${title.toLowerCase()}-${mainCategory}`}
                   className='text-red-400 font-semibold'
+                  onClick={() => setMenuOpen(false)}
                 >
                   {mainCategory}
                 </Link>
@@ -50,6 +51,7 @@ return (
                           key={isublink._id}
                           to={`/category/${title.toLowerCase()}-${mainCategory}-${isublink.name.split(' ')[2]}`}
                           className='text-gray-500 hover:text-black font-semibold block'
+                          onClick={() => setMenuOpen(false)}
                         >
                           {isublink.name.split(' ')[2]}
                         </Link>

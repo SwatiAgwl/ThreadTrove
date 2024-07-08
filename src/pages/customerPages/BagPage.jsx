@@ -61,7 +61,7 @@ export const BagPage = () => {
 
 
 return (
-    <div className='w-8/12 max-w-maxContent mx-auto py-6'>
+    <div className='w-10/12 sm:w-8/12 max-w-maxContent mx-auto py-6'>
       <h1 className='text-2xl font-semibold mb-6'>Your Bag</h1>
       {totalItems > 0 ? (
         <div className='flex flex-col lg:flex-row justify-between gap-4'>

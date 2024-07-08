@@ -79,7 +79,7 @@ export function login(email,password,navigate){
         }
         catch(err){
             console.log("log in api error ",err);
-            toast.error(`Couldn't login, ${err}`)
+            toast.error(err.message);
         }
         dispatch(setLoading(false));
         toast.dismiss(toastId)

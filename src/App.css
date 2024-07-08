@@ -36,3 +36,8 @@ html,body{
   animation: gradient-animation 5s ease infinite;
 }
 
+@media (max-width: 640px) {
+  .no-hover-sm {
+    pointer-events: none;
+  }
+}

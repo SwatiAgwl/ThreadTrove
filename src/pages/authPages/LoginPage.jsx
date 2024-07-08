@@ -82,7 +82,7 @@ export const LoginPage = () => {
               <div className='flex flex-row gap-1'>
                 <p>New user?</p>
                 <Link to='/signup' className='text-blue-600 hover:underline'>
-                  Register
+                  Signup
                 </Link>
               </div>
             </div>

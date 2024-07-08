@@ -33,12 +33,12 @@ export const ProductCard = ({product}) => {
   return (
     <div className='z-5'>
         <Link to={`/product/${product._id}`}>
-            <div className='w-[220px] border border-gray-200 flex flex-col gap-2 hover:shadow-lg hover:scale-105 transition-transform duration-200'>
-                <div className='relative h-[294px] '>
-                    <img src={product?.thumbnail} alt='' className='w-full h-full rounded-t-md z-5'></img>
+            <div className='w-full sm:w-[220px] border border-gray-200 flex flex-col gap-2 hover:shadow-lg sm:hover:scale-105 sm:transition-transform sm:duration-200'>
+                <div className='relative h-[260px] sm:h-[294px] '>
+                    <img src={product?.thumbnail} alt='' className='w-full h-full z-5 '></img>
                     {
                         inWishlist? (
-                            <IoIosHeart onClick={(e)=> wishlistHandler(e)} className='absolute top-0 right-0 h-7 w-7 text-red-600 ' />
+                            <IoIosHeart onClick={(e)=>wishlistHandler(e)} className='absolute top-0 right-0 h-7 w-7 text-red-600 ' />
                         ):
                         (
                             <IoIosHeartEmpty onClick={(e)=> wishlistHandler(e)} className='absolute top-0 right-0 h-7 w-7'/>
@@ -47,7 +47,9 @@ export const ProductCard = ({product}) => {
                    
                 </div>
                 <div className='px-3 py-1 '>
-                    <p className='font-semibold'>{product?.name}</p>
+                    {/* <p className='font-semibold'>{product?.name.slice(0,10)}</p> */}
+                    <p className='font-semibold'>{product?.name.length > 10 ? `${product.name.slice(0, 8)}..` : product.name}
+                    </p>
                     <p>₹{product?.price}</p>
                 </div>
             </div>

@@ -346,10 +346,10 @@ export const Navbar = () => {
       {menuOpen && (
         <div className="lg:hidden  absolute top-20 left-0 right-0 bg-white shadow-lg py-4 z-20">
           <ul className="flex flex-col items-center gap-4 py-4">
-            <Sublinks title="Women" item={item} setItem={setItem} categoryLinks={categoryLinks} />
-            <Sublinks title="Men" item={item} setItem={setItem} categoryLinks={categoryLinks} />
-            <Sublinks title="Brands" item={item} setItem={setItem} categoryLinks={categoryLinks} />
-            <Sublinks title="More" item={item} setItem={setItem} categoryLinks={categoryLinks} />
+            <Sublinks title="Women" item={item} setItem={setItem} categoryLinks={categoryLinks} setMenuOpen={setMenuOpen} />
+            <Sublinks title="Men" item={item} setItem={setItem} categoryLinks={categoryLinks} setMenuOpen={setMenuOpen} />
+            <Sublinks title="Brands" item={item} setItem={setItem} categoryLinks={categoryLinks} setMenuOpen={setMenuOpen} />
+            <Sublinks title="More" item={item} setItem={setItem} categoryLinks={categoryLinks}  setMenuOpen={setMenuOpen}/>
             <li>
               <Link className="hover:no-underline" to={'/about'}>
                 About Us

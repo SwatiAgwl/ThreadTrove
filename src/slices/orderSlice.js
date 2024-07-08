@@ -5,6 +5,8 @@ const initialState= {
     orderItems:localStorage.getItem('orderItems') ? 
     JSON.parse(localStorage.getItem('orderItems')) : [],
 }
+console.log('Initial state from localStorage:', initialState);
+
 const orderSlice= createSlice({
     name: "order",
     initialState: initialState,

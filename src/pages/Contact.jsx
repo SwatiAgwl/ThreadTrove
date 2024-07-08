@@ -38,11 +38,11 @@ export const Contact = () => {
 
 
 return (
-    <div className='mt-6 w-10/12 mx-auto space-y-3'>
+    <div className='mt-6 w-11/12 sm:w-10/12 mx-auto space-y-3'>
       <h1 className='text-4xl font-bold text-center'>Get In Touch</h1>
       <p className='text-xl text-center'>We'd love to hear from you. Please fill out this form.</p>
 
-      <div className='flex flex-col lg:flex-row py-6 px-6 justify-between'>
+      <div className='flex flex-col lg:flex-row py-6 px-2 sm:px-6 justify-between'>
         {/* Form */}
         <div className='w-full lg:w-1/2 px-8'>
         <form className='flex flex-col gap-3 w-full' onSubmit={handleSubmit(submitContactForm)}>
@@ -110,9 +110,9 @@ return (
 
         {/* Contact Cards */}
         <div className='flex flex-col gap-4 w-full lg:w-1/2 px-6 py-4 rounded-lg'>
-          <ContactCard icon={<FaLocationDot />} heading={"Address"} content={"Meeran Malli Market, Derabassi, Punjab"} />
+          <ContactCard icon={<FaLocationDot />} heading={"Address"} content={"Main Market, Derabassi, Punjab - 140507"} />
           <ContactCard icon={<BiSolidPhoneCall />} heading={"Call Us:"} content={"9888362135, 96462482220"} />
-          <ContactCard icon={<MdMail />} heading={"Email"} content={"kalamandir@gmail.com"} />
+          <ContactCard icon={<MdMail />} heading={"Email"} content={"kalamandir852@gmail.com"} />
           {/* <ContactCard heading={"Follow us on:"} content={<div className='flex flex-row'><IoLogoInstagram className='mr-2' /><FaFacebookSquare /></div>} /> */}
           {/* <div> */}
           <h3 className='text-2xl font-semibold text-center'>Follow us on: </h3>

@@ -7,7 +7,15 @@ export const OrdersPage = () => {
   const {token}= useSelector((state)=> state.auth);
   // const [orderItems, setOrderItems]= useState(null);
   const {orderItems}= useSelector((state)=> state.order);
-  const dispatch= useDispatch();
+  // const dispatch= useDispatch();
+  useEffect(() => {
+    console.log("orderItems before rendering: ", orderItems);
+  }, []);
+
+  useEffect(() => {
+    console.log("orderItems after state change: ", orderItems);
+  }, [orderItems]);
+
  
   // orderItems.map( (orderItem,index)=>(
 
@@ -49,7 +57,8 @@ export const OrdersPage = () => {
   //     getOrderItems();
   // },[])
 
-  console.log("orderItems ",orderItems);
+  // console.log("orderItems ",orderItems);
+ 
 //   return (
 //     <div>
 //       <div>

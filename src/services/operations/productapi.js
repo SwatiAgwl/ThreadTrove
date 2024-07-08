@@ -7,6 +7,7 @@ const {createProduct_api , getProductDetails_api,getAllCategories_api, getCatego
 // fetch all categories
 export const fetchCategories= async()=>{
     let result=[];
+    const toastId= toast.loading("Loading...")
     try{
         const response= await apiConnector("GET",getAllCategories_api,);
         console.log("get all categories api response ",response);
@@ -21,7 +22,9 @@ export const fetchCategories= async()=>{
         console.log("get all categories api error ",err);
         toast.error("Couldn't fetch all categories");
     }
+    toast.dismiss(toastId)
     return result;
+    
 }
 
 // add new product

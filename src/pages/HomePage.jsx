@@ -33,7 +33,7 @@ export const HomePage = () => {
         <div className='flex flex-wrap justify-center gap-8'>
           {[ suitImage2, kurta,set2, best].map((image, index) => (
             <div key={index} className='transform relative overflow-hidden hover:scale-105 transition-transform duration-300'>
-              <img className='w-48 h-64 md:w-52 md:h-72 object-cover rounded-lg shadow-lg' src={image} alt='' />
+              <img className='w-48  h-full md:w-52  object-cover rounded-lg shadow-lg' src={image} alt='' />
               <div className='absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'></div>
             </div>
           ))}
@@ -41,10 +41,11 @@ export const HomePage = () => {
       </div>
 
       {/* Women's Wear Section */}
-      <div className='h-90vh w-10/12 mx-auto rounded-xl bg-gradient-to-r from-orange-100 via-pink-100 to-yellow-100 mt-10 flex items-center py-5 px-4'>
-        <div className='w-11/12 lg:w-10/12 max-w-screen-xl mx-auto h-full flex flex-col lg:flex-row items-center animate-fade-in'>
-          <div className='w-full lg:w-1/2 h-full flex items-center'>
-            <p className='text-3xl md:text-4xl text-gray-800 font-bold mb-6 lg:mb-0 animated-gradient-text'>Women's Wear</p>
+      <div className='h-full md:h-70vh w-10/12 mx-auto rounded-xl bg-gradient-to-r from-orange-100 via-pink-100 to-yellow-100 mt-10 flex items-center py-5 px-4'>
+        <div className='w-11/12 lg:w-10/12 max-w-screen-xl mx-auto  flex flex-col lg:flex-row items-center animate-fade-in'>
+          <div className='w-full lg:w-1/2 flex items-center'>
+            <p className='text-3xl md:text-4xl text-gray-800 font-bold mb-6 lg:mb-0 animated-gradient-text'>
+              Women's Wear</p>
           </div>
           <div className='w-full lg:w-1/2 grid grid-cols-2 gap-6'>
             {[lehenga, suitImage5, top, set].map((image, index) => (
@@ -69,7 +70,7 @@ export const HomePage = () => {
       </video>
       </div>
       {/* Men's Wear Section */}
-      <div className='h-90vh bg-gradient-to-r from-blue-100 via-green-100 to-teal-100 mt-10 flex items-center w-10/12 rounded-2xl mx-auto mb-4 py-5 px-4'>
+      <div className='md:h-70vh bg-gradient-to-r from-blue-100 via-green-100 to-teal-100 mt-10 flex items-center w-10/12 rounded-2xl mx-auto mb-10 py-5 px-4'>
         <div className='w-11/12 lg:w-10/12 max-w-screen-xl mx-auto h-full flex flex-col lg:flex-row-reverse items-center animate-fade-in'>
           <div className='w-full lg:w-1/2 h-full flex lg:flex-row-reverse items-center'>
             <p className='text-3xl md:text-4xl text-gray-800 font-bold mb-6 lg:mb-0 animated-gradient-text'>Men's Wear</p>

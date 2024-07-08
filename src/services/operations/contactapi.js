@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 const {contactUs_api}= contactEndpoints;
 
 export const contactUs= async(data)=>{
-    const toastId = toast.loading("Loading...")
+    const toastId = toast.loading("Sending...")
     try{
         console.log("inside services ",data);
         const res= await apiConnector("POST", contactUs_api,data);
@@ -13,7 +13,7 @@ export const contactUs= async(data)=>{
         if( !res.data.success){
             throw new Error(res.data.message);
         }
-        toast.success("Data sent");
+        toast.success("Message sent");
     }
     catch(err){
         console.log("contact us api error ",err);

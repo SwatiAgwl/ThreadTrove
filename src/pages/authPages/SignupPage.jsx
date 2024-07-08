@@ -45,7 +45,7 @@ export const SignupPage = () => {
 return (
     <div className='min-h-screen w-full flex justify-center items-center bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100'>
       <div className='w-11/12 md:w-2/3 lg:w-1/3 bg-white rounded-lg shadow-lg p-8 md:p-12'>
-        <h2 className='text-3xl md:text-4xl font-bold text-center text-gray-800 mb-6'>Signup</h2>
+        <h2 className='text-3xl md:text-4xl font-bold text-center text-gray-800 mb-6'>SignUp</h2>
         <form onSubmit={submitHandler} className='flex flex-col gap-4'>
           <input
             className='w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition duration-200'

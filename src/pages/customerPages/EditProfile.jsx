@@ -31,8 +31,8 @@ export const EditProfile = () => {
     }
 
 return (
-  <div className="h-screen flex justify-center items-center bg-gray-100">
-    <div className="w-8/12 mx-auto border border-gray-300 px-6 py-4 bg-white rounded-lg shadow-lg">
+  <div className="h-fit py-2 md:h-screen flex justify-center items-center bg-gray-100">
+    <div className="w-11/12 h-fit md:w-8/12 mx-auto border border-gray-300 px-6 py-4 bg-white rounded-lg shadow-lg">
       <h1 className="text-2xl font-bold mb-4">Edit Details</h1>
 
       <div className="mb-4">

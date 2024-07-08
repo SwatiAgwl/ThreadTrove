@@ -22,7 +22,7 @@ export const HeroSection = () => {
         spaceBetween={5}
         slidesPerView={1}
         pagination={{ clickable: true }}
-        autoplay={{ delay: 2000, disableOnInteraction: true }}
+        autoplay={{ delay: 4000, disableOnInteraction: true }}
         loop={true}
         className='h-full'
         style={{
