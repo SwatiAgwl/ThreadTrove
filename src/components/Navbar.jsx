@@ -281,7 +281,7 @@ export const Navbar = () => {
         </div>
 
         {/* User Actions */}
-        <div className="flex gap-4 items-center">
+        {/* <div className="flex gap-4 items-center">
           {token == null ? (
             <div className="flex gap-2">
               <Link to={'/login'}>
@@ -290,7 +290,22 @@ export const Navbar = () => {
               <Link to={'/signup'}>
                 <button className="border border-gray-200 px-3 py-1 rounded-md">Sign Up</button>
               </Link>
-            </div>
+            </div> */}
+            <div className="flex gap-4 items-center">
+  {token == null ? (
+    <div className="flex gap-2">
+      <Link to={'/login'}>
+        <button className="bg-[#424c70] text-white px-4 py-2 rounded-md hover:bg-[#2b2f5efb] focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-colors duration-200">
+           Log In
+        </button>
+      </Link>
+      <Link to={'/signup'}>
+        <button className="bg-[#424c70] text-white px-4 py-2 rounded-md hover:bg-[#2b2f5efb] focus:outline-none focus:ring-2 focus:ring-indigo-300 transition-colors duration-200">
+          Sign Up
+        </button>
+      </Link>
+    </div>
+        
           ) : (
             <div className="relative group">
               <CgProfile className="text-gray-600 text-xl cursor-pointer" />
