@@ -52,6 +52,7 @@ export const addProduct= async(data,token)=>{
 // get category page data
 export const getCategoryPageData= async(categoryId)=>{
     let result="";
+    const toastId= toast.loading("Loading...")
     try{
         const response= await apiConnector("POST",getCategoryPageData_api,{categoryId});
         console.log("get category page api response ",response);
@@ -65,6 +66,7 @@ export const getCategoryPageData= async(categoryId)=>{
         console.log("get category page data api error ",err);
         toast.error("Couldn't fetch category page data");
     }
+    toast.dismiss(toastId)
     return result;
 }
 
@@ -72,6 +74,7 @@ export const getCategoryPageData= async(categoryId)=>{
 // get details of a product
 export const fetchProductDetails = async(product_id)=>{
     let result="";
+    const toastId= toast.loading("Loading...")
     try{
         const response= await apiConnector("POST", getProductDetails_api,{prodId:product_id});
         console.log("get product details api response ",response);
@@ -84,6 +87,7 @@ export const fetchProductDetails = async(product_id)=>{
         console.log("get product details api error ",err);
         toast.error("Couldn't fetch the product data");
     }
+    toast.dismiss(toastId)
     return result;
 }
 
