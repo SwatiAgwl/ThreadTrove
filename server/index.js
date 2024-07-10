@@ -1,3 +1,5 @@
+const dotenv= require('dotenv');
+dotenv.config();
 const express= require('express');
 const app= express();
 
@@ -7,8 +9,7 @@ const paymentRoutes= require('./routes/payment');
 const productRoutes= require('./routes/product');
 const contactRoutes= require('./routes/contact');
 
-const dotenv= require('dotenv');
-dotenv.config();
+
 const cookieParser= require('cookie-parser');
 const database= require('./config/database');
 const {cloudinaryConnect}= require('./config/cloudinary')
