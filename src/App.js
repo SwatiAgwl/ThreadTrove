@@ -24,13 +24,31 @@ import { CreateCategory } from './pages/adminPages/CreateCategory';
 import { AdminSidebar } from './components/AdminSidebar';
 import { Dashboard } from './pages/adminPages/Dashboard';
 import { Navigate } from 'react-router-dom';
+import { fetchCategories } from './services/operations/productapi';
+import { DotLoader } from 'react-spinners';
+import { useState,useEffect } from 'react';
 
 function App() {
     const {user}= useSelector((state)=> state.user);
+    const [loading, setLoading] = useState(true);
+    const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const categories = await fetchCategories();
+      setCategories(categories);
+      setLoading(false);
+    };
+    getCategories();
+  }, []);
+
+  if (loading) {
+    return <div className='w-full h-screen flex justify-center items-center'><DotLoader color="#f97ca3" /> </div>;
+  }
 
   return (
     <div className="App">
-      <Navbar/>
+      <Navbar categories={categories}/>
       <Routes>
         <Route path='/' element={<HomePage/>} ></Route>
         <Route path='/login' element={<LoginPage/>} ></Route>

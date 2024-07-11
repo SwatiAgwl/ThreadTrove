@@ -13,7 +13,7 @@ import { logout } from '../services/operations/authapi';
 import { Sublinks } from './Sublinks';
 import { fetchCategories } from '../services/operations/productapi';
 
-export const Navbar = () => {
+export const Navbar = ({ categories })  => {
   const { token } = useSelector((state) => state.auth);
   const { totalItems } = useSelector((state) => state.bag);
   const { totItems } = useSelector((state) => state.wishlist);
@@ -23,20 +23,10 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const [confirmationModal, setConfirmationModal] = useState(null);
   const [item, setItem] = useState('');
-  const [categories, setCategories] = useState([]);
   const [categoryLinks, setCategoryLinks] = useState([]);
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-
-  useEffect(() => {
-    const getCategories = async () => {
-      const categories = await fetchCategories();
-      setCategories(categories);
-    
-    };
-    getCategories();
-  }, []);
 
   useEffect(() => {
     if (categories && item) {
